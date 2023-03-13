@@ -1,8 +1,5 @@
 package com.marlon.blog.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.marlon.blog.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,7 +15,6 @@ import java.util.stream.Collectors;
 @Component("userDetailsService")
 public class MyUserDetailsService implements UserDetailsService {
     private final UserService userService;
-    private final Logger logger = LoggerFactory.getLogger(MyUserDetailsService.class);
     public MyUserDetailsService(UserService userService) {
         this.userService = userService;
     }
@@ -36,31 +32,6 @@ public class MyUserDetailsService implements UserDetailsService {
                 .map(authority -> new SimpleGrantedAuthority(authority.getName()))
                 .collect(Collectors.toList());
 
-        logger.info("\n\n\n Loaded authorities for user {}: {}", email, grantedAuthorities);
-
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
     }
 }
-
-//@Component("userDetailsService")
-//public class MyUserDetailsService implements UserDetailsService {
-//    private final UserService userService;
-//    public MyUserDetailsService(UserService userService) {
-//        this.userService = userService;
-//    }
-//    @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        Optional<User> optionalAccount = userService.findOneByEmail(email);
-//        if (optionalAccount.isEmpty()) {
-//            throw new UsernameNotFoundException("User not found");
-//        }
-//        User user = optionalAccount.get();
-//        List<GrantedAuthority> grantedAuthorities = user
-//                .getAuthorities()
-//                .stream()
-//                .map(authority -> new SimpleGrantedAuthority(authority.getName()))
-//                .collect(Collectors.toList());
-//
-//        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities); // (2)
-//    }
-//}

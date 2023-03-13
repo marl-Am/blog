@@ -25,7 +25,7 @@ public class UserService {
         if (user.getId() == null) {
             if (user.getAuthorities().isEmpty()) {
                 Set<Authority> authorities = new HashSet<>();
-                authorityRepository.findById("ROLE_USER").ifPresent(authorities::add);
+                authorityRepository.findById("ROLE_GUEST").ifPresent(authorities::add);
                 user.setAuthorities(authorities);
             }
         }

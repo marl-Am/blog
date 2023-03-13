@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@RequiredArgsConstructor
+@RequiredArgsConstructor    // generates a constructor with required arguments for all final fields
 public class EncoderConfiguration {
     @Bean
     public static PasswordEncoder passwordEncoder() {

@@ -34,7 +34,8 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-    // Allow Put operation
+    // supports the use of HTTP methods other than GET and POST in a web application
+    // allows the Put operation
     @Bean
     public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
         return new HiddenHttpMethodFilter();
